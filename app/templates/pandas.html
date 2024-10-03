@@ -1,0 +1,218 @@
+{% extends "base.html" %}
+
+
+{% block nav %}
+
+
+
+{% endblock nav %}
+
+
+
+{% block content %}
+
+<div class="container">
+
+    <h1>Introdução ao Pandas</h1>
+
+    <h2>Vamos iniciar nosso tutorial de Pandas</h2>
+
+    <p class="text">Para começar, vamos primeiro instalar o Pandas através do pip.</p>
+
+    <p class="console">
+        <code class="python">$ pip install pandas</code>
+    </p>
+    <p class="text">
+        Caso já tenha instalado o Pandas, dentro de um arquivo Python, digite:
+    </p>
+
+    <ul class="text">
+        <li class="text">Primeiro, vamos importar a biblioteca do Pandas</li>
+        <br>
+        <p class="console">
+            <code class="python">
+                    # Importando a biblioteca
+                    <br />
+                    >>> import pandas as pd
+                </code>
+        </p>
+        <li class="text">Vamos criar um dicionario em python</li>
+        <p class="console">
+            <code class="python">
+                        # criando o dicionario em python
+                        <br />
+                        >>> dados = {
+                            <br>
+                            "nome":["Pedro","João",'Maria',Maila],
+                            <br>
+                            "idade":[23,25,36,25],
+                            <br>
+                            "profissao": ["Aluno","Professor","Atriz",Estudante],
+                            <br>
+                            "Cidade": ["Salvador","Recife","Rio de Janeiro","Salvador"],
+                            <br>
+                            "sexo": ["M","M","S","S"]
+                            <br>
+                        }
+                    </code>
+        </p>
+
+        <li class="text">
+            <p>Feito isso vamos transforma em dataframe no pandas <br /></p>
+        </li>
+
+        <p class="console">
+            <code class="python">
+                    # Transformando o dicionario dados em python em um dataframe pandas<br />
+                    <br />
+                    >>> df = pd.Dataframe(dados)
+                </code>
+        </p>
+        <p>
+            <strong>IMPORTANTE:</strong> Caso queria criar um dataframe,<br>
+            por meio de uma unica linha no dicionario será preciso<br>
+            usar o index=0 dentro
+            pd.Dataframe(dados,<em>index=0</em>)
+        </p>
+        <li class="text">
+            <p>para tranforma em arquivos Excel usamos o to_excel<br /></p>
+        </li>
+        <p class="console">
+            <code class="python">
+                    # Transformando o dataframe pandas em um arquivo excel<br />
+                    <br />
+                    >>> novo_arquivo = df.to_excel("novo_arquivo.xlsx")
+                </code>
+        </p>
+        <p>
+            <strong>OBS:</strong> Existes varios formas de criar arquivos com pandas<br>
+            de diferentes tipos também csv, json, etc...
+        </p>
+        <li class="text">
+            <p>Para pegar apenas alguma coluna especifica<br /></p>
+        </li>
+        <p class="console">
+            <code class="python">
+                    # Pegando um coluna especifica<br />
+                    <br />
+                    >>>  nome_idade = df.[['nome','idade']]<br />
+                    >>> print(nome_idade)
+                </code>
+        </p>
+        <p class="text">Esse método é para pegarmos apenas colunas, mas se você <br />
+            quiser pegar apenas uma linhas, ou linhas ,até mesmo um valor especifico</p>
+        <li class="text">
+            <p>Para isso vamos usar o metodo <strong>.loc[]</strong> <br /></p>
+        </li>
+        <p class="console">
+            <code class="python">
+                    # pegar uma linha 2 linhas<br />
+                    <br />
+                    >>>  print(df.loc[1:2])<br />
+                    <br />
+                    # para pegar linhas que corresponde a uma codição
+                    <br />
+                    <br />
+                    >>> alunos = df.loc["profissao"] = 'Aluno'
+                    <br />
+                    <br />
+                    >>> print(alunos)
+                    <br />
+                    <br />
+                    # Pegar várias linhas e colunas usando o loc
+                    <br />
+                    <br />
+                    >>> cidade_salvador = df.loc[df["cidade"] == "Salvador", ['nome','profissao']
+                    <br />
+                    <br />
+                    # Pegar um valor especifico
+                    <br />
+                    <br />
+                    >>> print(df.loc[1,'nome'])<br />
+
+                </code>
+        </p>
+
+        <li class="text">
+            <p>Vamos adicionar uma coluna<strong>.loc[]</strong> <br />
+                para adcionar uma coluna usaremos como abaixo</p>
+        </li>
+        <p class="console">
+            <code class="python">
+                    # Criando uma nova coluna com uma valor padrão<br />
+                    <br />
+                    >>> novo_coluna = df[:,'Descricao'] = "Pessoa Fisica"
+                    print(nova_coluna)
+                    <br>
+                    # Criar uma coluna a parti de uma coluna existente<br />
+                    <br>
+                    >>> df.loc['media_idade'] = len(df['idade']) / 5
+                    <br> 
+                </code>
+        </p>
+
+        <li class="text">
+            <p>Vamos adicionar uma linhas<br />
+                Para adicionar uma linha usaremos o <strong>.append</strong></p>
+        </li>
+        <p class="console">
+            <code class="python">
+                    # Adicionar uma linhas
+                    <br />
+
+                    # criando o dicionario em python
+                    <br />
+                    >>> nova_linha = {
+                        <br>
+                        "nome":["Gilberto"],
+                        <br>
+                        "idade":[46],
+                        <br>
+                        "profissao": ["Jardineiro"],
+                        <br>
+                        "Cidade": ["Salvador"],
+                        <br>
+                        "sexo": ["M"]
+                        <br>
+                    }
+
+                    <br />
+                    >>> novo_linha = pd.Dataframe(nova_linha)
+                    <br>
+                    >>>df = df.append(nova_linha)
+                    <br>
+                    >>>print(df)
+                    <br>
+                </code>
+        </p>
+
+        <li class="text">
+            <p>Excluir linhas e Colunas<br />
+                Para excluir linas ou colunas usaermos o <strong>.drop</strong></p>
+        </li>
+
+        <p class="console">
+        <pre>
+                    <code class="python">
+                        # Excluindo uma linha<br />
+                        <br />
+                        # axis = 0 -> è o eixo da linha
+                        <br>
+                        >>> novo_df = df.drop(0,axis=0)
+                        <br>
+                        print(nova_df)
+                        <br>
+                        # Excluindo uma coluna<br />
+                        <br />
+                        # axis = 1 -> è o eixo da coluna
+                        <br>
+                        >>> novo_df = df.drop(1,axis=1)
+                        print(nova_df)
+                        <br>
+                    </code>
+                </pre>
+        </p>
+    </ul>
+</div>
+
+{% endblock %}
